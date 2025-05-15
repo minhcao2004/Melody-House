@@ -75,8 +75,9 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String fullName = request.getParameter("fullName");
-        String phone = request.getParameter("phone");
+        String dob = request.getParameter("dob");
         String email = request.getParameter("email");
+        String role = request.getParameter("role");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
@@ -91,36 +92,45 @@ public class RegisterServlet extends HttpServlet {
             }
 
             if (dao.checkUsernameExists(username)) {
-                request.setAttribute("error", "Username already exists");
+                request.setAttribute("error", "Username đã tồn tại !");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
             if (dao.checkEmailExists(email)) {
-                request.setAttribute("error", "Email already exists");
+                request.setAttribute("error", "Email đã tồn tại !");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
-            // Insert new user with default role (student)
-            String sql = "INSERT INTO users (fullname, email, username, password, role_id) VALUES (?, ?, ?, ?, 1)";
-            try (Connection con = new DBConnection().getConnection(); 
-                PreparedStatement st = con.prepareStatement(sql)) {
+            // Sửa lại câu lệnh SQL và thứ tự các tham số
+            String sql = "INSERT INTO users (fullname, dob, email, username, password, role_id) VALUES (?, ?, ?, ?, ?, ?)";
+            try (Connection con = new DBConnection().getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+
                 st.setString(1, fullName);
-                st.setString(2, email);
-                st.setString(3, username);
-                st.setString(4, password);
-                st.executeUpdate();
+                st.setDate(2, java.sql.Date.valueOf(dob));
+                st.setString(3, email);
+                st.setString(4, username);
+                st.setString(5, password);
+                st.setInt(6, Integer.parseInt(role));
+
+                int rowsAffected = st.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    con.commit(); // Commit transaction
+                    request.setAttribute("success", "Registration successful! Please login.");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    return;
+                }
             }
 
-            request.setAttribute("success", "Registration successful! Please login.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("error", "Đã xảy ra lỗi trong quá trình đăng ký !");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "An error occurred during registration");
+            request.setAttribute("error", "Đã xảy ra lỗi trong quá trình đăng ký: " + e.getMessage());
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
 }
-
