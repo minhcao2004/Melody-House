@@ -14,21 +14,8 @@
         <div class="container">
             <div class="register form">
                 <header>Register</header>
-                <%-- Hiển thị thông báo lỗi nếu có --%>
-                <% if (request.getAttribute("errorMessage") != null) { %>
-                    <div class="error-message">
-                        <%= request.getAttribute("errorMessage") %>
-                    </div>
-                <% } %>
-                <%-- Hiển thị thông báo thành công nếu có --%>
-                <% if (request.getAttribute("successMessage") != null) { %>
-                    <div class="success-message">
-                        <%= request.getAttribute("successMessage") %>
-                    </div>
-                <% } %>
                 <form action="register" method="post" id="registerForm">
                     <input type="text" name="fullName" placeholder="Full name" required>
-                    <input type="text" name="phone" placeholder="Phone number" required>
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="text" name="username" placeholder="Username" required>
                     <input type="password" name="password" placeholder="Password" required>

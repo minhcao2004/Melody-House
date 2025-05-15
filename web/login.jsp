@@ -12,13 +12,7 @@
     <body>
         <div class="container">
             <div class="login form">
-                <header>Login</header>
-                <%-- Hiển thị thông báo lỗi nếu có --%>
-                <% if (request.getAttribute("errorMessage") != null) { %>
-                    <div class="error-message">
-                        <%= request.getAttribute("errorMessage") %>
-                    </div>
-                <% } %>
+                <header>Login</header>               
                 <form action="login" method="post">
                     <input type="text" name="username" placeholder="Enter your username" required>
                     <input type="password" name="password" placeholder="Enter your password" required>
