@@ -26,9 +26,7 @@ public class LoginDAO {
                             rs.getString("fullname"),
                             rs.getDate("dob") != null ? rs.getDate("dob").toLocalDate() : null,
                             rs.getInt("role_id"),
-                            rs.getBoolean("is_active"),
-                            rs.getString("reset_token"),
-                            rs.getDate("reset_token_expiry") != null ? rs.getDate("reset_token_expiry").toLocalDate() : null
+                            rs.getBoolean("is_active")                        
                     );
                 }
             }
@@ -73,9 +71,7 @@ public class LoginDAO {
                             rs.getString("fullname"),
                             rs.getDate("dob") != null ? rs.getDate("dob").toLocalDate() : null,
                             rs.getInt("role_id"),
-                            rs.getBoolean("is_active"),
-                            rs.getString("reset_token"),
-                            rs.getDate("reset_token_expiry") != null ? rs.getDate("reset_token_expiry").toLocalDate() : null
+                            rs.getBoolean("is_active")
                     );
                 }
             }

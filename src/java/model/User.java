@@ -1,19 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 import java.time.LocalDate;
@@ -32,13 +17,11 @@ public class User {
     private LocalDate dob;
     private int roleId;
     private boolean isActive;
-    private String resetToken;
-    private LocalDate resetTokenExpiry;
 
     public User() {
     }
 
-    public User(int id, String username, String password, String email, String fullname, LocalDate dob, int roleId, boolean isActive, String resetToken, LocalDate resetTokenExpiry) {
+    public User(int id, String username, String password, String email, String fullname, LocalDate dob, int roleId, boolean isActive) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,8 +30,6 @@ public class User {
         this.dob = dob;
         this.roleId = roleId;
         this.isActive = isActive;
-        this.resetToken = resetToken;
-        this.resetTokenExpiry = resetTokenExpiry;
     }
 
     public int getId() {
@@ -114,21 +95,4 @@ public class User {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-
-    public String getResetToken() {
-        return resetToken;
-    }
-
-    public void setResetToken(String resetToken) {
-        this.resetToken = resetToken;
-    }
-
-    public LocalDate getResetTokenExpiry() {
-        return resetTokenExpiry;
-    }
-
-    public void setResetTokenExpiry(LocalDate resetTokenExpiry) {
-        this.resetTokenExpiry = resetTokenExpiry;
-    }
-
 }
