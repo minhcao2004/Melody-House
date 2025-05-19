@@ -103,7 +103,7 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            // Sửa lại câu lệnh SQL và thứ tự các tham số
+            
             String sql = "INSERT INTO users (fullname, dob, email, username, password, role_id) VALUES (?, ?, ?, ?, ?, ?)";
             try (Connection con = new DBConnection().getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
 

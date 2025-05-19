@@ -82,50 +82,6 @@ public class LoginDAO {
         }
         return null;
     }
-
-    public void updateResetToken(String email, String token, java.sql.Date expiryDate) throws Exception {
-        String sql = "UPDATE users SET reset_token=?, reset_token_expiry=? WHERE email=?";
-        try (Connection con = new DBConnection().getConnection();
-             PreparedStatement st = con.prepareStatement(sql)) {
-            st.setString(1, token);
-            st.setDate(2, expiryDate);
-            st.setString(3, email);
-            st.executeUpdate();
-        }
-    }
-
-    public User getUserByResetToken(String token) throws Exception {
-        String sql = "SELECT * FROM users WHERE reset_token=? AND reset_token_expiry > GETDATE()";
-        try (Connection con = new DBConnection().getConnection();
-             PreparedStatement st = con.prepareStatement(sql)) {
-            st.setString(1, token);
-            try (ResultSet rs = st.executeQuery()) {
-                if (rs.next()) {
-                    return new User(
-                            rs.getInt("id"),
-                            rs.getString("username"),
-                            rs.getString("password"),
-                            rs.getString("email"),
-                            rs.getString("fullname"),
-                            rs.getDate("dob") != null ? rs.getDate("dob").toLocalDate() : null,
-                            rs.getInt("role_id"),
-                            rs.getBoolean("is_active"),
-                            rs.getString("reset_token"),
-                            rs.getDate("reset_token_expiry") != null ? rs.getDate("reset_token_expiry").toLocalDate() : null
-                    );
-                }
-            }
-        }
-        return null;
-    }
-
-    public void updatePassword(User user, String newPassword) throws Exception {
-        String sql = "UPDATE users SET password=?, reset_token=NULL, reset_token_expiry=NULL WHERE id=?";
-        try (Connection con = new DBConnection().getConnection();
-             PreparedStatement st = con.prepareStatement(sql)) {
-            st.setString(1, newPassword);
-            st.setInt(2, user.getId());
-            st.executeUpdate();
-        }
-    }
+ 
+    
 }

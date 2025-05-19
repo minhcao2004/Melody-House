@@ -12,11 +12,19 @@
     <body>
         <div class="container">
             <div class="login form">
-                <header>Login</header>               
+                <header>Login</header>
+                <%
+                    if (request.getAttribute("error")!= null){
+                        String er=(String)request.getAttribute("error");
+                    %>
+                <h4 style="color: red"><%= er %></h3>
+                    <%
+                        }                 
+                    %>
                 <form action="login" method="post">
                     <input type="text" name="username" placeholder="Enter your username" required>
                     <input type="password" name="password" placeholder="Enter your password" required>
-                    <a href="resetPassword.jsp">Forgot password?</a>
+                    <a href="requestPassword.jsp">Forgot password?</a>
                     <input type="submit" class="button" value="Login">
                 </form>
                 <div class="signup">
